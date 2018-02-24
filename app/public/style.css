@@ -1,0 +1,22 @@
+body{
+	background-image:url("tomato.jpeg");
+	background-size: cover;
+	width:960px;
+	margin:auto;
+	text-align: center;
+}
+
+h3{
+	font-family:"Pacifico", cursive;
+	color:black;
+	margin-top:180px;
+	font-size: 40px;
+}
+
+h1{
+	font-family: 'Fjalla One', sans-serif;
+	color:white;
+	font-weight: bold;
+	font-size: 80px;
+	margin-bottom: 50px;
+}
