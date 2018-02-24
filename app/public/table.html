@@ -8,7 +8,8 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="style.css">
-
+  
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Cantarell|Fjalla+One" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 
@@ -18,15 +19,59 @@
 <body id="viewtable">
     <h1 id="restitle-header" href="home.html">Fancy Restaurant</h1>
     <h1 id="res-waiting-header">Current Reservations and Waiting List</h1>
-    <a class="btn btn-light" id="res-button" href="survey.html" role="button">Make Reservation</a>
-    <div class="container">
-      
-    </div>
+    <a class="btn btn-light btn-sm" id="res-button" href="survey.html" role="button">Make Reservation</a>
+    <div class="container" id="table-goes-here"></div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+  <script type="text/javascript">
+
+    //Populates Table in HTML
+    function createTable(){
+      var currentURL = window.location.origin;
+      $.ajax({ url: currentURL + "/api/tables", method: "GET"})
+
+      .then(function(data){
+        console.log(data);
+
+        for (var i = 0; i < data.length; i++) {
+
+          var section = $("<div>");
+          section.addClass("well");
+          section.attr("id", "tableWell-" + i + 1);
+          $("#section").append(section);
+          var tableNumber = i + 1;
+          $("#tableWell-" + i + 1).append("<h2><span class='label label-primary'>" + tableNumber + "</span> | " + data[i].customerID + "</h2>");
+        }
+      });
+    };
+
+    function waitlistFunction() {
+      var currentURL = window.location.origin;
+      $.ajax({ url: currentURL + "/api/waitlist", method: "GET" })
+      
+      .then(function(waitlist) {
+        console.log(waitlist);
+
+        for (var i = 0; i < waitlist.length; i++) {
+
+          var waitlistSection = $("<div>");
+          waitlistSection.addClass("well");
+          waitlistSection.attr("id", "waitlistWell-" + i + 1);
+          $("#waitlistSection").append(waitlistSection);
+          var tableNumber = i + 1;
+          $("#waitlistWell-" + i + 1).append("<h2><span class='label label-primary'>" + tableNumber + "</span> | " + waitlist[i].customerID + "</h2>");
+        }
+      });
+    }
+
+    createTable();
+    waitlistFunction();
+
+</script>
+
+<!-- Optional JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
 </html>
