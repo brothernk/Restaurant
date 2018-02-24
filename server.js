@@ -41,6 +41,39 @@ app.get("/api/waitlist", function(req, res) {
   res.json(waitList);
 });
 
+// Search for Table Requests - provides JSON
+app.get("/api/:table?", function(req, res) {
+  var chosen = req.params.table;
+ 
+  if (chosen) {
+    console.log(chosen);
+ 
+    for (var i = 0; i < table.length; i++) {
+      if (chosen === table[i].name) {
+        return res.json(name[i]);
+      }
+    }
+    return res.json(false);
+  }
+  return res.json(table);
+ });
+ 
+ 
+ app.post("/api/new", function(req, res) {
+  // req.body hosts is equal to the JSON post sent from the user
+  // This works because of our body-parser middleware
+  var newreservation = req.body;
+  // Using a RegEx Pattern to remove spaces from newCharacter
+  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+  newreservation.name = newreservation.name.replace(/\s+/g, "").toLowerCase();
+ 
+  console.log(newreservation);
+ 
+  characters.push(newreservation);
+ 
+  res.json(newreservation);
+ });
+
 // html routes
 //=================================================================
 app.get("/", function(req, res) {
