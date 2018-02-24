@@ -17,6 +17,8 @@ app.use(bodyParser.json());
 // require("./routes/apiRoutes")(app);
 // require("./routes/htmlRoutes")(app);
 
+app.use(express.static('app/public'));
+app.use(express.static('files'))
 
 // 
 //=================================================================
