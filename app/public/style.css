@@ -11,8 +11,12 @@ body{
 }
 
 #viewtable{
+	background-image: url("food.jpeg");
+	margin-left:-100px;
+}
+
+#res-page{
 	background-image: url("blueberry.jpeg");
-	margin-left:350px;
 }
 
 /*Headers*/
@@ -39,7 +43,35 @@ body{
 
 #res-waiting-header{
 	font-family:"Pacifico", cursive;
-	color:black;
-	font-size: 25px;
+	color:lightgrey;
+	font-size: 22px;
 	margin-bottom: 30px;
+}
+
+#form-container{
+	width:400px;
+	margin:auto;
+	background-color:white;
+	padding:30px;
+	border:1px solid darkgrey;
+	border-radius: 5px;
+}
+
+form{
+	text-align: left;
+	padding: 10px;
+}
+
+#make-res{
+	font-family: 'Fjalla One', sans-serif;
+	color:white;
+	font-size: 60px;
+	padding:20px;
+}
+
+h6{
+	text-align: center;
+	font-family: "Fjalla One", sans-serif;
+	font-size: 20px;
+	margin-bottom: 20px;
 }
